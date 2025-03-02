@@ -19,7 +19,8 @@ namespace AlgorithmVisualizer
 {
     public partial class Form1 : Form
     {
-
+        protected int checks = 0;
+        protected int swaps = 0;
         public Form1()
         {
             InitializeComponent();
@@ -57,6 +58,8 @@ namespace AlgorithmVisualizer
         {
             //chartMain.Series[0].Points.Add(new DataPoint(goingUp, goingUp++));
             disableButtons();
+            swaps = 0;
+            checks = 0;
             DataPointCollection col = chartMain.Series[0].Points;
 
             await Task.Run(() =>
@@ -67,12 +70,15 @@ namespace AlgorithmVisualizer
                     for (int right = left + 1; right < col.Count(); right++)
                     {
                         col[right].Color = Color.Pink;
+                        checks++;
                         if (col[left].YValues[0] > col[right].YValues[0])
                         {
                             var prev = col[left].YValues;
                             col[left].YValues = col[right].YValues;
                             col[right].YValues = prev;
+                            swaps++;
                         }
+                        Stats.Text = "Checks: " + checks + "; Swaps: " + swaps;
                         Refresh();
                         col[right].Color = Color.CornflowerBlue;
                     }
@@ -91,6 +97,8 @@ namespace AlgorithmVisualizer
         private async void quickSort_Click(object sender, EventArgs e)
         {
             disableButtons();
+            swaps = 0;
+            checks = 0;
             DataPointCollection easyType = chartMain.Series[0].Points;
 
             await Task.Run( () => quickSortHelper(ref easyType, 0, easyType.Count));
@@ -117,6 +125,7 @@ namespace AlgorithmVisualizer
                     arr[pivotPos].Color = Color.Red;
                     for (int i = min; i < pivotPos; i++)
                     {
+                        checks++;
                         arr[i].Color = Color.Pink;
                         if (arr[i].YValues[0] > pivotVal[0])
                         {
@@ -131,6 +140,7 @@ namespace AlgorithmVisualizer
                             pivotPos--;
                             i--;
 
+                            swaps++;
                             arr[i + 1].Color = Color.CornflowerBlue;
                             arr[pivotPos + 1].Color = Color.CornflowerBlue;
                             arr[pivotPos].Color = Color.Red;
@@ -141,6 +151,7 @@ namespace AlgorithmVisualizer
                             Refresh();
                             arr[i].Color = Color.CornflowerBlue;
                         }
+                        Stats.Text = "Checks: " + checks + "; Swaps: " + swaps;
                         arr[pivotPos].Color = Color.CornflowerBlue;
                     }
 
@@ -159,16 +170,19 @@ namespace AlgorithmVisualizer
 
         private void Refresh_Click(object sender, EventArgs e)
         {
+            swaps = 0;
+            checks = 0;
+            Stats.Text = "Checks: " + checks + "; Swaps: " + swaps;
             chartMain.Series[0].Points.Clear();
             var rand = new Random();
             List<int> startList = new List<int>();
 
-            for (int i = 1; i < 100; i++)
+            for (int i = 0; i < 100; i++)
             {
                 startList.Add(i);
             }
 
-            for (int i = 1; i < 100; i++)
+            for (int i = 0; i < 100; i++)
             {
                 int nextData = rand.Next(startList.Count);
                 chartMain.Series[0].Points.Add(new DataPoint(i, startList[nextData]));

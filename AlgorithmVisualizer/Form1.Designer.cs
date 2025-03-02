@@ -32,6 +32,7 @@
             this.chartMain = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.quickSort = new System.Windows.Forms.Button();
             this.Refresh = new System.Windows.Forms.Button();
+            this.Stats = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chartMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,11 +75,21 @@
             this.Refresh.UseVisualStyleBackColor = true;
             this.Refresh.Click += new System.EventHandler(this.Refresh_Click);
             // 
+            // Stats
+            // 
+            this.Stats.AutoSize = true;
+            this.Stats.Location = new System.Drawing.Point(461, 420);
+            this.Stats.Name = "Stats";
+            this.Stats.Size = new System.Drawing.Size(35, 13);
+            this.Stats.TabIndex = 4;
+            this.Stats.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Stats);
             this.Controls.Add(this.Refresh);
             this.Controls.Add(this.quickSort);
             this.Controls.Add(this.chartMain);
@@ -87,6 +98,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.chartMain)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -96,6 +108,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartMain;
         private System.Windows.Forms.Button quickSort;
         private System.Windows.Forms.Button Refresh;
+        private System.Windows.Forms.Label Stats;
     }
 }
 
